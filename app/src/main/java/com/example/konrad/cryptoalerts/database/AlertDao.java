@@ -9,6 +9,8 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 /**
  * Created by Kayser Sose on 2018-05-23.
  */
@@ -22,12 +24,12 @@ public interface AlertDao {
     void removeFAlert(Alert alert);
 
     @Query("select * from alert")
-    public List<Alert> getAllAlerts();
+    Flowable<List<Alert>> getAllAlerts();
 
     @Update
     public void updateAlert(Alert alert);
 
-    @Query("select * from alert where cryptoId=alert.cryptoId")
-    public List<Alert> getCryptoAlerts(Alert alert);
+    @Query("select * from alert where cryptoId=:id")
+    Flowable<List<Alert>> getCryptoAlerts(String id);
 
 }

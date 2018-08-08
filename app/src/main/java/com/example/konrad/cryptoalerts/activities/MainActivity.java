@@ -5,42 +5,30 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.example.konrad.cryptoalerts.R;
-import com.example.konrad.cryptoalerts.activities.HomeFragment;
-import com.example.konrad.cryptoalerts.database.AppDatabase;
-import com.example.konrad.cryptoalerts.database.Favourite;
-import com.example.konrad.cryptoalerts.database.Wallet;
-import com.facebook.stetho.Stetho;
-
-import java.util.List;
+import com.example.konrad.cryptoalerts.activities.Home.HomeFragment;
+import com.example.konrad.cryptoalerts.activities.Wallet.WalletFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
 
-    // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
-// The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
+
     private ActionBarDrawerToggle drawerToggle;
-    private AppDatabase database;
-    private TextView mtestTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Stetho.initializeWithDefaults(getApplicationContext());
-        database = AppDatabase.getDatabase(getApplicationContext());
 
-        mtestTextView = (TextView) findViewById(R.id.tv_test);
 
 
 
@@ -56,21 +44,15 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(drawerToggle);
 
-        database.walletDao().deleteWallet(new Wallet("bitcoin", 2.3));
-        database.walletDao().deleteWallet(new Wallet("ethereum", 2.2));
-        database.walletDao().deleteWallet(new Wallet("litecoin", 2.5));
 
 
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
+                menuItem -> {
+                    selectDrawerItem(menuItem);
+                    return true;
                 });
     }
 
@@ -87,12 +69,15 @@ public class MainActivity extends AppCompatActivity {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
+        Bundle args = new Bundle();
         switch(menuItem.getItemId()) {
             case R.id.nav_home:
                 fragmentClass = HomeFragment.class;
+                args.putBoolean("FAVOURITE", false);
                 break;
             case R.id.nav_favourite:
-                fragmentClass = FavouriteFragment.class;
+                fragmentClass = HomeFragment.class;
+                args.putBoolean("FAVOURITE", true);
                 break;
             case R.id.nav_wallet:
                 fragmentClass = WalletFragment.class;
@@ -109,12 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(args);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView

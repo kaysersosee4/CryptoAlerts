@@ -3,5 +3,14 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="icon">icon</string>
+    <string name="unit_price">Unit Price</string>
+    <string name="amount">Amount</string>
+    <string name="value">Value</string>
+    <string name="confirm">confirm</string>
+    <string name="back">Back</string>
+    <string name="total_value">Total value:</string>
+    <string name="cryptocurrency">Cryptocurrency</string>
+    <string name="id">Id</string>
 
 </resources>

@@ -3,6 +3,8 @@ package com.example.konrad.cryptoalerts.coinmarketcapApi.service;
 import com.example.konrad.cryptoalerts.coinmarketcapApi.model.Cryptocurrency;
 
 import java.util.List;
+
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 import retrofit2.http.GET;

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/crypto_list_row">
 
     <TextView
         android:id="@+id/tv_rank"
@@ -23,7 +25,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/iv_icon"
@@ -32,13 +34,13 @@
 
     <TextView
         android:id="@+id/tv_price"
-        android:layout_width="90dp"
+        android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/tv_name"
         android:layout_toStartOf="@+id/tv_change"
-        android:text="TextView"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/tv_change"

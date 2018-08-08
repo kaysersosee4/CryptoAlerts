@@ -8,6 +8,8 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 /**
  * Created by Kayser Sose on 2018-05-18.
  */
@@ -21,5 +23,5 @@ public interface FavouriteDao {
     void removeFavourite(Favourite favourite);
 
     @Query("select * from favourite")
-    public List<Favourite> getAllFavourites();
+    Flowable<List<Favourite>> getAllFavourites();
 }

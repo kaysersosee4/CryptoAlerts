@@ -1,11 +1,14 @@
 package com.example.konrad.cryptoalerts.coinmarketcapApi.model;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 /**
  * Created by Konrad on 2018-04-29.
  */
 
-public class Cryptocurrency {
+public class Cryptocurrency implements Serializable {
     private String id;
     private String name;
     private String symbol;
@@ -34,6 +37,8 @@ public class Cryptocurrency {
 
 
     private boolean favourite;
+    private boolean wallet;
+    private boolean alert;
 
     //Only for tests
 
@@ -53,6 +58,8 @@ public class Cryptocurrency {
         this.weekPercentChange = weekPercentChange;
         this.lastUpdated = lastUpdated;
         this.favourite = false;
+        this.wallet = false;
+        this.alert = false;
     }
 
     @Override
@@ -170,5 +177,21 @@ public class Cryptocurrency {
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
+    }
+
+    public boolean isWallet() {
+        return wallet;
+    }
+
+    public void setWallet(boolean wallet) {
+        this.wallet = wallet;
+    }
+
+    public boolean isAlert() {
+        return alert;
+    }
+
+    public void setAlert(boolean alert) {
+        this.alert = alert;
     }
 }
